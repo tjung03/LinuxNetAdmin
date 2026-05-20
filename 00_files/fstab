@@ -1,0 +1,60 @@
+
+#
+# /etc/fstab
+# Created by anaconda on Mon Apr 13 03:09:19 2026
+#
+# Accessible filesystems, by reference, are maintained under '/dev/disk/'.
+# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info.
+#
+# After editing this file, run 'systemctl daemon-reload' to update systemd
+# units generated from this file.
+#
+/dev/mapper/cs-root     /                       xfs     defaults        0 0
+UUID=bf291563-04e0-49b3-8fe7-bbd764a8a2db /boot                   xfs     defaults        0 0
+/dev/mapper/cs-home     /home                   xfs     defaults        0 0
+/dev/mapper/cs-swap     none                    swap    defaults        0 0
+#
+# (1) Specific configuration
+#
+## /dev/nvme0n1p1
+#UUID="57982fb8-0243-40dc-b24a-f1ae2d2bf159"	/testmount	ext4	defaults	0 2
+#/dev/nvme0n1p1	/testmount	xfs	defaults	0 2
+#
+# (2) Oracle configuration
+#
+## /dev/nvme0n3p1
+#UUID="da641dda-4675-417b-8158-f9dac5d88eb5"	/oracle	xfs	defaults	0 0
+#
+# (3) LVM configuration
+#
+#/dev/vg1/lv1	/lv1	ext4	defaults	0 2
+#/dev/mapper/vg1-lv2	/lv2	ext4	defaults	0 2
+#
+# (4) LVM Practice 1 configuration
+#
+#/dev/vg1/lv1	/lvm1	ext4	defaults	0 2
+#/dev/vg1/lv2	/lvm2	ext4	defaults	0 2
+#/dev/vg2/lv3	/lvm3	ext4	defaults	0 2
+#/dev/vg2/lv4	/lvm4	ext4	defaults	0 2
+#
+# (5) RAID configuration
+#
+#/dev/md0	/raid0	xfs	defaults	0 2
+#/dev/md0	/raid1	xfs	defaults	0 2
+#/dev/md0	/raid5	xfs	defaults	0 2
+#
+# (6) RAID practice configuration
+#
+#/dev/md0	/raid0	xfs	defaults	0 2
+#/dev/md1	/raid1	xfs	defaults	0 2
+#/dev/md5	/raid5	xfs	defaults	0 2
+#
+# (7) SWAP configuration
+#
+#/swap/swapfile	none	swap	defaults	0 0
+#/dev/nvme0n1p1	none	swap	defaults	0 0
+#/dev/cs/swap2	none	swap	defaults	0 0
+#
+# (8) SMB configuration
+#
+#//192.168.10.202/samba_share	/mnt/server		cifs	credentials=/root/cred	0 0
