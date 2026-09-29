@@ -14,6 +14,21 @@ ip route
 
 장치가 연결되어 있는지, 어떤 프로필이 활성화되어 있는지, 주소와 기본 경로가 예상한 네트워크에 맞는지 순서대로 읽습니다. 여러 인터페이스가 있다면 프로필 이름과 장치 이름을 혼동하지 않습니다. 주소나 게이트웨이를 변경할 때는 원격 접속이 끊길 수 있으므로 해당 호스트의 접속 경로를 확인한 뒤 별도로 작업합니다.
 
+### 연결 프로필을 바꾸기 전후
+
+원격 호스트의 주소·게이트웨이·DNS를 바꾸면 현재 SSH 세션과 복구 경로를 동시에 잃을 수 있습니다. 콘솔 또는 별도 관리 경로와 되돌릴 값을 준비하고, 현재 활성 프로필의 전체 설정을 먼저 기록합니다.
+
+```bash
+nmcli connection show --active
+nmcli connection show '<확인한-프로필-이름>'
+ip address
+ip route
+```
+
+변경은 `nmcli connection modify '<확인한-프로필-이름>' <속성> <값>` 형식으로 프로필에 기록합니다. IPv4 고정 주소라면 주소·접두사, 게이트웨이, DNS, `ipv4.method`를 한 묶음으로 검토합니다. `nmcli connection up '<확인한-프로필-이름>'`은 프로필을 활성화하면서 통신을 끊을 수 있으므로 무인 원격 세션에서 시험하지 않습니다. 외부에서 프로필 파일을 편집했다면 `nmcli connection reload`로 다시 읽게 한 뒤 활성화를 별도로 판단합니다.
+
+적용 후에는 첫 조회 명령뿐 아니라 `ip address`, `ip route`, 연결별 DNS, 실제 대상 서비스 요청을 다시 확인합니다. `nmtui`도 NetworkManager 프로필을 편집하는 인터페이스이므로 변경 영향과 검증 순서는 같습니다.
+
 ## 2. 이름 해석과 도달성
 
 ```bash
@@ -37,6 +52,6 @@ sestatus
 
 ## 현재 환경에 적용할 때
 
-RHEL 9에서 NetworkManager의 기본 연결 프로필 저장 형식은 keyfile(`.nmconnection`)입니다. 이전 `ifcfg` 형식은 호환을 위한 대상이며 현재는 사용 중단 예정 형식으로 분류됩니다. 이 문서의 조회에는 `nmcli`와 `ip`를 사용합니다. 실제 변경은 배포판 버전과 기존 프로필을 확인한 후 진행합니다.
+RHEL 9에서 NetworkManager의 기본 연결 프로필 저장 형식은 keyfile(`.nmconnection`)입니다. 이전 `ifcfg` 형식은 호환을 위한 대상이며 현재는 사용 중단 예정 형식으로 분류됩니다. 이 문서의 조회에는 `nmcli`와 `ip`를 사용합니다. 실제 변경은 배포판 버전과 기존 프로필을 확인한 후 진행하며, 수동으로 비밀 값이 든 프로필을 복사하거나 공개 저장소에 올리지 않습니다.
 
 참고: [Red Hat Enterprise Linux 9 네트워크 관리 문서](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/configuring_and_managing_networking/index), [NetworkManager keyfile 형식](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_and_managing_networking/assembly_networkmanager-connection-profiles-in-keyfile-format_configuring-and-managing-networking)

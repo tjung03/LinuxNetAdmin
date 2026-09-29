@@ -17,9 +17,9 @@ Linux 네트워크 설정과 서버 서비스의 연결 관계를 정리한 학�
 
 ## 다룬 영역
 
-- **네트워크:** NetworkManager 연결 프로필, 주소·라우팅·DNS 확인, 본딩 개념 — [네트워크 점검](01_NET/README.md)
+- **네트워크:** NetworkManager 연결 프로필, 주소·라우팅·DNS 확인, 안전한 변경 순서, 본딩 개념 — [네트워크 점검](01_NET/README.md)
 - **서비스:** DNS·DHCP, HTTP, FTP, 메일, NFS·SMB, SSH, 시간 동기화 및 그 밖의 학습 주제 — [서비스와 접근 제어](docs/services-and-access.md)
-- **접근 제어:** firewalld 영역과 허용 서비스, SELinux 모드·파일 컨텍스트를 서비스 점검 흐름에 연결
+- **접근 제어:** firewalld 영역·NAT·포트 전달과 SELinux 비표준 포트 정책을 서비스 점검 흐름에 연결
 
 학습노트의 예전 `ifcfg`·`iptables` 명령을 그대로 실행하기보다 현재 RHEL 9 계열에서 쓰는 연결 프로필과 방화벽 관리 방식을 따릅니다. 버전별 차이는 [네트워크 점검](01_NET/README.md#현재-환경에-적용할-때)과 [서비스와 접근 제어](docs/services-and-access.md#현재-환경에-적용할-때)에 간단히 정리했습니다.
 
