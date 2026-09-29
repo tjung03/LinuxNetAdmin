@@ -1,3 +1,4 @@
+# 특정 실습 환경의 시작 파일 예시입니다. 고정 IP와 삭제·브라우저 옵션 별칭을 확인하고 필요한 설정만 적용하세요.
 # .bashrc
 
 # Source global definitions
